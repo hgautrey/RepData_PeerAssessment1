@@ -19,7 +19,7 @@ ActivityData$date <- as.Date(as.character(ActivityData$date), "%Y-%m-%d")
 
 ## What is mean total number of steps taken per day?
 Calculate the total number of steps per day.
-```{r steps per day, echo=TRUE, results='asis'}
+```{r steps_per_day, echo=TRUE, results='asis'}
 DaySum <- with(ActivityData, tapply(steps, date, sum))
 ```
 
@@ -29,14 +29,14 @@ hist(DaySum, main = "Histogram of the total number of steps taken each day", xla
 ```
 
 Calculate the mean and the median of the total number of steps taken per day
-```{r mean median, echo=TRUE}
+```{r mean_median, echo=TRUE}
 mean(DaySum, na.rm = TRUE)
 median(DaySum, na.rm = TRUE)
 ```
 
 ## What is the average daily activity pattern?
 A time series plot of the 5-minute interval (x-axis) and the average number of steps taken in that interval averaged across all days (y-axis)
-```{r steps per interval, echo=TRUE}
+```{r steps_per_interval, echo=TRUE}
 IntSum <- with(ActivityData, tapply(steps, interval, mean, na.rm = TRUE))
 plot(IntSum, type = "l", xlab = "Interval", ylab = "Number of steps", main = "Average daily activity pattern")
 ```
@@ -67,7 +67,7 @@ for(i in 1:nrow(ActivityData2)){
 ```
 
 Calculate the total number of steps per day and plot a histogram of the total number of steps taken each day.
-```{r steps per day2, echo=TRUE, results='asis'}
+```{r steps_per_day2, echo=TRUE, results='asis'}
 ActSum2 <- with(ActivityData2, tapply(steps, date, sum))
 hist(ActSum2, main = "Histogram of the total number of steps taken each day", xlab = "Total number of steps taken each day")
 mean(ActSum2, na.rm = TRUE)
@@ -78,14 +78,14 @@ Imputing the missing values lowers the mean and median values for the total numb
 
 ## Are there differences in activity patterns between weekdays and weekends?
 Create a new factor variable to show whether a date is a weekday or a weekend.
-```{r day factor, echo=TRUE}
+```{r day_factor, echo=TRUE}
 library(dplyr)
 ActivityData3 <- mutate(ActivityData2, day = ifelse(grepl("Saturday|Sunday", weekdays(date)), "weekend", "weekday"))
 ActivityData3$day <- as.factor(ActivityData3$day)
 ```
 
 A panel plot consisting of time series plots of the 5-minute interval (x-axis) and the average number of steps taken across all weekday days or weekend days (y-axis). 
-```{r panel plot, echo=TRUE}
+```{r panel_plot, echo=TRUE}
 sumday <- ddply(ActivityData3, .(interval, day), summarize, mean = mean(steps, na.rm = TRUE))
 library(lattice)
 xyplot(mean~interval|day, data = sumday, layout = c(1,2), type = "l", ylab = "Number of steps", xlab = "Interval")

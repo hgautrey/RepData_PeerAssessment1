@@ -60,7 +60,7 @@ IntSum <- with(ActivityData, tapply(steps, interval, mean, na.rm = TRUE))
 plot(IntSum, type = "l", xlab = "Interval", ylab = "Number of steps", main = "Average daily activity pattern")
 ```
 
-![](PA1_template_files/figure-html/steps per interval-1.png)<!-- -->
+![](PA1_template_files/figure-html/steps_per_interval-1.png)<!-- -->
 
 Determine the 5 minute interval with the highest number of average steps.
 
@@ -107,7 +107,7 @@ ActSum2 <- with(ActivityData2, tapply(steps, date, sum))
 hist(ActSum2, main = "Histogram of the total number of steps taken each day", xlab = "Total number of steps taken each day")
 ```
 
-![](PA1_template_files/figure-html/steps per day2-1.png)<!-- -->
+![](PA1_template_files/figure-html/steps_per_day2-1.png)<!-- -->
 
 ```r
 mean(ActSum2, na.rm = TRUE)
@@ -167,6 +167,6 @@ library(lattice)
 xyplot(mean~interval|day, data = sumday, layout = c(1,2), type = "l", ylab = "Number of steps", xlab = "Interval")
 ```
 
-![](PA1_template_files/figure-html/panel plot-1.png)<!-- -->
+![](PA1_template_files/figure-html/panel_plot-1.png)<!-- -->
 
 Weekend activity is spread throughout the day whereas weekday activity is concentrated around peak in the morning.
